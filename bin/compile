@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# bin/compile BUILD_DIR CACHE_DIR ENV_DIR
+
+while read x; do
+  echo $x | awk '
+BEGIN {
+  BUILD_DIR = "'"$1"'"
+  ENV_DIR = "'"$3"'"
+  FS = "="
+}
+{
+  mkdir = "mkdir -p $(dirname " BUILD_DIR "/" $2 ")"
+  print mkdir
+  system(mkdir)
+
+  cp = "cp " ENV_DIR "/" $1 " " BUILD_DIR "/" $2
+  print cp
+  system(cp)
+}
+  '
+done < $1/.config-file

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# bin/detect BUILD_DIR
+
+if [ -f $1/.config-file ]; then
+  echo "Confilg File" && exit 0
+else
+  echo "no" && exit 1
+fi
